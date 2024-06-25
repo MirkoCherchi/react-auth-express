@@ -5,6 +5,7 @@ import { AuthContext } from "../contexts/AuthContext";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const { login, isAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -14,10 +15,13 @@ const Login = () => {
     }
   }, [isAuthenticated, navigate]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const userData = { email };
-    login(userData);
+    try {
+      await login({ email, password });
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
@@ -45,6 +49,7 @@ const Login = () => {
             required
           />
         </div>
+        {error && <p className="error">{error}</p>}
         <button className="loginButton" type="submit">
           Login
         </button>
