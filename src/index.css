@@ -1,0 +1,374 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color: #000;
+}
+/* navbar */
+
+.navLinks {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.navLinks a {
+  text-decoration: none;
+  color: #020202;
+  font-weight: 800;
+}
+
+.navLinks a:hover {
+  text-decoration: underline;
+}
+
+/* Homepage */
+
+.homepage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding-top: 60px;
+}
+
+.titleHome {
+  color: #231f20;
+  font-size: 3rem;
+}
+
+.homepage p {
+  color: #f3dfa2;
+  font-size: 1.3125rem;
+}
+
+/* Login */
+
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+}
+
+.loginForm {
+  background-color: #f3dfa2;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  width: 100%;
+}
+
+.formGroup {
+  margin-bottom: 1rem;
+}
+
+.labelLogin {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #231f20;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #efe6dd;
+  border-radius: 4px;
+}
+
+.loginButton {
+  background-color: #bb4430;
+  color: #efe6dd;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Admin */
+
+.adminContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+}
+
+.adminTitle {
+  color: #231f20;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.adminDescription {
+  color: #231f20;
+  font-size: 1.5rem;
+  text-align: center;
+  max-width: 600px;
+  padding: 0 1rem;
+}
+
+/* CardPosts */
+
+.post-card {
+  background-color: #efe6dd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+}
+
+.post-card h2 {
+  color: #231f20;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.post-card img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.post-card p {
+  color: #231f20;
+  line-height: 1.6;
+}
+
+.post-card strong {
+  color: #bb4430;
+}
+
+.tags {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  align-items: center;
+}
+
+.tag {
+  background-color: #231f20;
+  color: #f3dfa2;
+  padding: 4px 8px;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+.read-more {
+  display: inline-block;
+  color: #7ebdc2;
+  text-decoration: none;
+  margin-top: 10px;
+  transition: color 0.3s ease-in-out;
+}
+
+.read-more:hover {
+  color: #bb4430;
+}
+
+.posts-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.postCard {
+  width: calc(33.33% - 20px);
+  margin-bottom: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  overflow: hidden;
+  background-color: #efe6dd;
+  border-radius: 8px;
+}
+
+/* SinglePost */
+
+.post-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #efe6dd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.post-container h2 {
+  color: #231f20;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.post-image {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.post-content {
+  color: #231f20;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.post-meta {
+  margin-top: 20px;
+  color: #231f20;
+}
+
+.post-meta p {
+  margin-bottom: 10px;
+}
+
+.post-meta strong {
+  font-weight: bold;
+}
+
+.post-tags {
+  margin-top: 10px;
+}
+
+.tagSingle {
+  display: inline-block;
+  background-color: #7ebdc2;
+  color: #231f20;
+  padding: 4px 8px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+/* CreatePost */
+
+.new-post-form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #231f20;
+  color: #efe6dd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.new-post-form-container label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.new-post-form-container input[type="text"],
+.new-post-form-container textarea,
+.new-post-form-container select,
+.new-post-form-container input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #7ebdc2;
+  border-radius: 4px;
+  background-color: #efe6dd;
+  color: #231f20;
+}
+
+.new-post-form-container textarea {
+  min-height: 150px;
+}
+
+.new-post-form-container select {
+  background-color: #7ebdc2;
+  color: #231f20;
+}
+
+.new-post-form-container input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.new-post-form-container button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #bb4430;
+  border: none;
+  border-radius: 4px;
+  color: #efe6dd;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.new-post-form-container button:hover {
+  background-color: #f3dfa2;
+  color: #231f20;
+}
+
+.new-post-form-container .error {
+  color: #bb4430;
+  font-weight: bold;
+}
+
+.tags-container {
+  margin-bottom: 10px;
+}
+
+.tag-item {
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+.tags input[type="checkbox"] {
+  display: none;
+}
+
+.tags label {
+  display: inline-block;
+  padding: 5px 8px;
+  background-color: #7ebdc2;
+  border-radius: 4px;
+  color: #231f20;
+  cursor: pointer;
+}
+
+.tags input[type="checkbox"]:checked + label {
+  background-color: #f3dfa2;
+  color: #231f20;
+}
+
+/* Logout */
+
+.logout {
+  all: unset;
+  background-color: #7ebdc2;
+  color: #231f20;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: 800;
+}
+
+.logout:hover {
+  background-color: #f3dfa2;
+}
