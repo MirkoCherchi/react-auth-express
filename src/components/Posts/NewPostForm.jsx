@@ -1,3 +1,5 @@
+// NewPostForm.jsx
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -16,6 +18,7 @@ const NewPostForm = ({ onNewPostCreated }) => {
   const [categories, setCategories] = useState([]);
   const [availableTags, setAvailableTags] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -41,34 +44,25 @@ const NewPostForm = ({ onNewPostCreated }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    const categoryIdInt = parseInt(formData.category, 10);
-    if (isNaN(categoryIdInt)) {
-      setError("Category Id deve essere un numero intero");
-      return;
-    }
-
-    const tagsArray = formData.tags.map((tagId) => parseInt(tagId, 10));
-    if (!Array.isArray(tagsArray) || tagsArray.some(isNaN)) {
-      setError("Tags deve essere un array di numeri");
-      return;
-    }
-
-    const formDataToSend = new FormData();
-    formDataToSend.append("title", formData.title);
-    formDataToSend.append("content", formData.content);
-    formDataToSend.append("categoryId", categoryIdInt);
-    formDataToSend.append("published", formData.published);
-
-    tagsArray.forEach((tagId) => {
-      formDataToSend.append("tags", tagId);
-    });
-
-    if (formData.img) {
-      formDataToSend.append("img", formData.img);
-    }
+    // Tutto il codice per inviare il post al server
 
     try {
+      const formDataToSend = new FormData();
+      formDataToSend.append("title", formData.title);
+      formDataToSend.append("content", formData.content);
+      formDataToSend.append("categoryId", parseInt(formData.category, 10));
+      formDataToSend.append("published", formData.published);
+
+      formData.tags.forEach((tagId) => {
+        formDataToSend.append("tags", parseInt(tagId, 10));
+      });
+
+      if (formData.img) {
+        formDataToSend.append("img", formData.img);
+      }
+
       const response = await axios.post(`${apiUrl}/posts`, formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -89,7 +83,7 @@ const NewPostForm = ({ onNewPostCreated }) => {
 
       // Chiamiamo la funzione per aggiornare i post nel componente genitore
       if (typeof onNewPostCreated === "function") {
-        onNewPostCreated();
+        onNewPostCreated(response.data); // Passa i dati del nuovo post
       }
       navigate(`/post/${response.data.slug}`);
     } catch (error) {
@@ -97,6 +91,8 @@ const NewPostForm = ({ onNewPostCreated }) => {
       setError(
         "Errore durante la creazione del nuovo post. Riprova più tardi."
       );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -199,7 +195,9 @@ const NewPostForm = ({ onNewPostCreated }) => {
         </label>
       </div>
       {error && <p className="error">{error}</p>}
-      <button type="submit">Crea Post</button>
+      <button type="submit" disabled={loading}>
+        {loading ? "Caricamento..." : "Crea Post"}
+      </button>
     </form>
   );
 };

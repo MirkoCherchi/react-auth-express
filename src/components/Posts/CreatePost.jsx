@@ -1,29 +1,24 @@
-import React, { useContext } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import NewPostForm from "./NewPostForm";
-import { AuthContext } from "../contexts/AuthContext"; // Assicurati che il percorso sia corretto
-
-const apiUrl = import.meta.env.VITE_BASE_API_URL;
 
 const CreatePost = () => {
-  const { isAuthenticated } = useContext(AuthContext);
+  const [postData, setPostData] = useState(null);
 
-  const handleNewPostCreated = async () => {
-    try {
-      if (isAuthenticated) {
-        const response = await axios.post(`${apiUrl}/posts`, postData);
-        console.log("Post creato:", response.data);
-      } else {
-        console.log("L'utente non è autenticato. Impossibile creare il post.");
-      }
-    } catch (error) {
-      console.error("Errore durante la creazione del post:", error);
-    }
+  const handleNewPostCreated = (newPostData) => {
+    setPostData(newPostData);
   };
 
   return (
     <div>
+      <h1>Crea un nuovo post</h1>
       <NewPostForm onNewPostCreated={handleNewPostCreated} />
+      {postData && (
+        <div>
+          <h2>Post Creato con Successo!</h2>
+          <p>ID: {postData.id}</p>
+          <p>Title: {postData.title}</p>
+        </div>
+      )}
     </div>
   );
 };
