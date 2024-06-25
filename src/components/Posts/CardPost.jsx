@@ -1,11 +1,11 @@
-// CardPost.jsx
-
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContext";
 
 function CardPost({ title, img, content, category, tags, slug, onDelete }) {
   const fallbackImgUrl = "https://placehold.co/600x400";
   const [showModal, setShowModal] = useState(false);
+  const { isAuthenticated } = useContext(AuthContext);
 
   const handleDelete = () => {
     onDelete(slug);
@@ -35,9 +35,12 @@ function CardPost({ title, img, content, category, tags, slug, onDelete }) {
       <Link className="read-more" to={`/post/${slug}`}>
         Leggi di più
       </Link>
-      <button className="delete-btn" onClick={() => setShowModal(true)}>
-        Elimina
-      </button>
+
+      {isAuthenticated && ( // Mostra il bottone solo se l'utente è autenticato
+        <button className="delete-btn" onClick={() => setShowModal(true)}>
+          Elimina
+        </button>
+      )}
 
       {showModal && (
         <div className="modal">
