@@ -20,17 +20,6 @@ const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  const fetchUserData = async () => {
-    try {
-      const response = await axios.get(`${apiUrl}/auth/me`);
-      setUser(response.data);
-      setIsAuthenticated(true);
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-      logout();
-    }
-  };
-
   const login = async (userData) => {
     try {
       const response = await axios.post(`${apiUrl}/auth/login`, userData);
